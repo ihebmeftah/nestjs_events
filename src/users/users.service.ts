@@ -4,11 +4,24 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UUID } from 'crypto';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) { }
   async create(createUserDto: CreateUserDto): Promise<User[]> {
+    const exist = await this.userRepository.exists({
+      where: [
+        { phone: createUserDto.phone },
+        { email: createUserDto.email },
+      ],
+    });
+    if (exist)
+      throw new HttpException(
+        'The phone number or email already exist',
+        HttpStatus.CONFLICT);
+    createUserDto.password = await hash(createUserDto.password, 10);
     await this.userRepository.save(createUserDto);
     return await this.findAll();
   }
@@ -17,17 +30,9 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
-  async findOne(id: number): Promise<User> {
-    const data = await this.userRepository.findOneBy({ id });
+  async findOneById(id: UUID): Promise<User> {
+    const data = await this.userRepository.findOneBy({ id: id });
     if (data) return data;
-    throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+    throw new HttpException('User with this id not found', HttpStatus.NOT_FOUND);
   }
 }

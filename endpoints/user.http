@@ -2,12 +2,8 @@
 GET http://localhost:3000/api/v1/users
 Content-Type: application/json
 
-### who iam
-GET http://localhost:3000/api/v1/users/user/profile
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhaGVuaW1lZnRhaEBnbWFpbC5jb20iLCJzdWIiOiI3MTNiNTg2MC1mMzA3LTQwMzUtODIzZi0zMTY0YzBiNjEzNzUiLCJpYXQiOjE3Mjk2Mjk2NTAsImV4cCI6MTcyOTYyOTcxMH0.hP4O1r0cVqaykVcmpAn8uj_F9y0tG03UyTuMwOJ9aG8
 ### find users by id
-GET http://localhost:3000/api/v1/users/84f1c1b9-dd02-4ca9-8885-cbe21979ef97
+GET http://localhost:3000/api/v1/users/4473a4c2-c442-4586-a6ce-839f11193a52
 Content-Type: application/json
 
 ### create user
@@ -19,14 +15,5 @@ Content-Type: application/json
     "lastName":"meftah",
     "email":"tahenimeftah@gmail.com",
     "phone": "23232322",
-    "password": "iheb"
-}
-
-### login user
-POST http://localhost:3000/api/v1/users/login
-Content-Type: application/json
-
-{
-    "email":"tahenimeftah@gmail.com",
     "password": "iheb"
 }

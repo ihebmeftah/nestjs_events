@@ -12,7 +12,6 @@ export class AuthService {
     ) { }
     async login(loginUser: LoginUserDto) {
         const user = await this.userService.findOneByEmail(loginUser.email);
-        if (!user) throw new HttpException("User with this email not exist", HttpStatus.NOT_FOUND);
         const isMatch = await compare(loginUser.password, user.password);
         if (!isMatch) throw new HttpException('Password incorrect', HttpStatus.UNAUTHORIZED);
         return {

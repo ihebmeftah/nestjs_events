@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Request, Param, ParseUUIDPipe, HttpStatus, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { UUID } from 'crypto';
+import { LoginUserDto } from './dto/login_user.dto';
+import { JwtAuthGuard } from '../auth/gurads/auth.guards';
 
 @Controller('users')
 export class UsersController {
@@ -24,5 +25,6 @@ export class UsersController {
   ) {
     return this.usersService.findOneById(id);
   }
+
 }
 

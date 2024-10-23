@@ -5,11 +5,16 @@ import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UUID } from 'crypto';
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
+import { LoginUserDto } from './dto/login_user.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) { }
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) { }
+
   async create(createUserDto: CreateUserDto): Promise<User[]> {
     const exist = await this.userRepository.exists({
       where: [
@@ -35,4 +40,12 @@ export class UsersService {
     if (data) return data;
     throw new HttpException('User with this id not found', HttpStatus.NOT_FOUND);
   }
+
+  async findOneByEmail(email: string): Promise<User> {
+    const data = await this.userRepository.findOneBy({ email: email });
+    if (data) return data;
+    throw new HttpException('User with this id not found', HttpStatus.NOT_FOUND);
+  }
+
+
 }

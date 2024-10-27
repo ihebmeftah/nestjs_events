@@ -1,13 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UUID } from 'crypto';
 import { compare, hash } from 'bcrypt';
-import { LoginUserDto } from './dto/login_user.dto';
-import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +12,7 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) { }
 
-  async create(createUserDto: CreateUserDto): Promise<User[]> {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const exist = await this.userRepository.exists({
       where: [
         { phone: createUserDto.phone },
@@ -27,8 +24,7 @@ export class UsersService {
         'The phone number or email already exist',
         HttpStatus.CONFLICT);
     createUserDto.password = await hash(createUserDto.password, 10);
-    await this.userRepository.save(createUserDto);
-    return await this.findAll();
+    return await this.userRepository.save(createUserDto);
   }
 
   async findAll(): Promise<User[]> {

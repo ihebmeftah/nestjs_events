@@ -2,10 +2,10 @@ import { Controller, Get, Post, Body, Request, Param, ParseUUIDPipe, HttpStatus,
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UUID } from 'crypto';
-import { LoginUserDto } from './dto/login_user.dto';
 import { JwtAuthGuard } from '../auth/gurads/auth.guards';
 
 @Controller('users')
+@UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 

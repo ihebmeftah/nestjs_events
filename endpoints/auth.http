@@ -3,11 +3,23 @@ POST http://localhost:3000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email":"tahenimeftah@gmail.com",
+    "email":"a@gmail.com",
+    "password": "iheb"
+}
+
+### register user
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "firstName":"ezz",
+    "lastName":"meftah",
+    "email":"a@gmail.com",
+    "phone": "20882310",
     "password": "iheb"
 }
 
 ### who iam
 GET http://localhost:3000/api/v1/auth/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhaGVuaW1lZnRhaEBnbWFpbC5jb20iLCJzdWIiOiI0NDczYTRjMi1jNDQyLTQ1ODYtYTZjZS04MzlmMTExOTNhNTIiLCJpYXQiOjE3Mjk3MDgzNDksImV4cCI6MTcyOTcwODQwOX0.TVdy2dmbUFo8MK6u6NmLqxlwvhOGO4CL3ZX2yKb3Upw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImloZWJAZ21haWwuY29tIiwic3ViIjoiOTFhYmE3YTUtODAxMS00YWZlLWJlNmUtNGJkMDQ5MWE5ODNjIiwiaWF0IjoxNzMwMDYwODQ1LCJleHAiOjE3MzAwNjA5MDV9.SFywsz0MhZ5jzVd1io-Wwbq51xvAmjSTn-1iHaGsNZ4

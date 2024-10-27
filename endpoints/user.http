@@ -1,19 +1,20 @@
 ### find all users 
 GET http://localhost:3000/api/v1/users
 Content-Type: application/json
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhamVkQGdtYWlsLmNvbSIsInN1YiI6IjZiNWVjYThmLTcwNjgtNDk3My05OGUwLWIwM2ZjYTgzY2VjYSIsImlhdCI6MTczMDA2MTEzMCwiZXhwIjoxNzMwMDYxNzMwfQ.AAPpHMti4cC8tBpUA_Zt81nbZQmPCcZEhIsHz-uzJy0
 ### find users by id
 GET http://localhost:3000/api/v1/users/4473a4c2-c442-4586-a6ce-839f11193a52
 Content-Type: application/json
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhamVkQGdtYWlsLmNvbSIsInN1YiI6IjZiNWVjYThmLTcwNjgtNDk3My05OGUwLWIwM2ZjYTgzY2VjYSIsImlhdCI6MTczMDA2MTEzMCwiZXhwIjoxNzMwMDYxNzMwfQ.AAPpHMti4cC8tBpUA_Zt81nbZQmPCcZEhIsHz-uzJy0
 ### create user
 POST http://localhost:3000/api/v1/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhamVkQGdtYWlsLmNvbSIsInN1YiI6IjZiNWVjYThmLTcwNjgtNDk3My05OGUwLWIwM2ZjYTgzY2VjYSIsImlhdCI6MTczMDA2MTEzMCwiZXhwIjoxNzMwMDYxNzMwfQ.AAPpHMti4cC8tBpUA_Zt81nbZQmPCcZEhIsHz-uzJy0
 
 {
-    "firstName":"taheni",
+    "firstName":"shobaa",
     "lastName":"meftah",
-    "email":"tahenimeftah@gmail.com",
-    "phone": "23232322",
+    "email":"shobaa@gmail.com",
+    "phone": "23237329",
     "password": "iheb"
 }

@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseUUIDPipe, HttpStatus } from '@nestjs/common';
 import { EventeService } from './evente.service';
 import { CreateEventeDto } from './dto/create-evente.dto';
 import { UpdateEventeDto } from './dto/update-evente.dto';
+import { JwtAuthGuard } from 'src/auth/gurads/auth.guards';
+import { UUID } from 'crypto';
 
 @Controller('evente')
+@UseGuards(JwtAuthGuard)
 export class EventeController {
-  constructor(private readonly eventeService: EventeService) {}
+  constructor(private readonly eventeService: EventeService) { }
 
   @Post()
   create(@Body() createEventeDto: CreateEventeDto) {
@@ -18,17 +21,8 @@ export class EventeController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.eventeService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventeDto: UpdateEventeDto) {
-    return this.eventeService.update(+id, updateEventeDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.eventeService.remove(+id);
+  findOne(
+    @Param('id', new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE },)) id: UUID) {
+    return this.eventeService.findOneById(id);
   }
 }

@@ -19,6 +19,13 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Get("/events")
+  getEventsOfUser(
+    @Request() req
+  ) {
+    return this.usersService.getEventsOfUser(req.user.userId);
+  }
+
   @Get(':id')
   findOneById(
     @Param('id', new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE },)) id: UUID,

@@ -1,15 +1,17 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UUID } from 'crypto';
-import { compare, hash } from 'bcrypt';
+import { hash } from 'bcrypt';
+import { EventeService } from 'src/evente/evente.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @Inject(forwardRef(() => EventeService)) private readonly eventeService: EventeService
   ) { }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -43,5 +45,9 @@ export class UsersService {
     throw new HttpException('User with this email not found', HttpStatus.NOT_FOUND);
   }
 
+  async getEventsOfUser(id: UUID) {
+    const user = await this.findOneById(id);
+    return await this.eventeService.findAllbyUser(id);
+  }
 
 }

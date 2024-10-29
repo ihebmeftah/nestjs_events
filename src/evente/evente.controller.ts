@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseUUIDPipe, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, ParseUUIDPipe, HttpStatus } from '@nestjs/common';
 import { EventeService } from './evente.service';
 import { CreateEventeDto } from './dto/create-evente.dto';
-import { UpdateEventeDto } from './dto/update-evente.dto';
 import { JwtAuthGuard } from 'src/auth/gurads/auth.guards';
 import { UUID } from 'crypto';
 

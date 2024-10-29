@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Request, Param, ParseUUIDPipe, HttpStatus, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, Param, ParseUUIDPipe, HttpStatus, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UUID } from 'crypto';
@@ -19,11 +19,11 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get("/events")
+  @Get(":id/events")
   getEventsOfUser(
-    @Request() req
+    @Param('id', new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE },)) id: UUID,
   ) {
-    return this.usersService.getEventsOfUser(req.user.userId);
+    return this.usersService.getEventsOfUser(id);
   }
 
   @Get(':id')

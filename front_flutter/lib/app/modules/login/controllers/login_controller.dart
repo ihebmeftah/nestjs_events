@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final siginFormkey = GlobalKey<FormState>();
-  final registerFormkey = GlobalKey<FormState>();
   final siginEmail = TextEditingController();
   final siginPassword = TextEditingController();
 

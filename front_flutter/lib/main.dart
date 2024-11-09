@@ -20,6 +20,7 @@ class App extends StatelessWidget {
       initialRoute: Routes.LOGIN,
       getPages: AppPages.routes,
       theme: ThemeData(
+          appBarTheme: const AppBarTheme(surfaceTintColor: Colors.white),
           textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
             foregroundColor: Colors.pink,

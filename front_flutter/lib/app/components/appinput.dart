@@ -41,6 +41,11 @@ class AppInput extends StatelessWidget {
                 return "Please enter a valid email";
               }
             }
+            if (textInputType == TextInputType.phone) {
+              if (!GetUtils.isPhoneNumber(value!)) {
+                return "Please enter a valid phone number";
+              }
+            }
             if (isRequired) {
               if (value!.isEmpty) {
                 return "This field is required";

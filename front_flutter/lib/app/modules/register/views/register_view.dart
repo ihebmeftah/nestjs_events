@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../components/appinput.dart';
 import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
@@ -9,16 +10,67 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('RegisterView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'RegisterView is working',
-          style: TextStyle(fontSize: 20),
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text('Create an account'),
+          centerTitle: false,
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+            padding: const EdgeInsets.all(25.0),
+            child: Form(
+                key: controller.registerFormkey,
+                child: Column(
+                  children: [
+                    AppInput(
+                      isRequired: true,
+                      controller: controller.registerUsername,
+                      prefixIcon: const Icon(Icons.person),
+                      name: "Username",
+                      hint: "John doe",
+                    ),
+                    const SizedBox(height: 10),
+                    AppInput(
+                      controller: controller.registerEmail,
+                      textInputType: TextInputType.emailAddress,
+                      prefixIcon: const Icon(Icons.email),
+                      name: "Email",
+                      hint: "Johndoe@example.com",
+                    ),
+                    const SizedBox(height: 10),
+                    AppInput(
+                      controller: controller.registerEmail,
+                      textInputType: TextInputType.phone,
+                      prefixIcon: const Icon(Icons.phone),
+                      name: "Phone",
+                      hint: "+216 20 000 000",
+                    ),
+                    const SizedBox(height: 10),
+                    AppInput(
+                      controller: controller.registerpassword,
+                      isPassword: true,
+                      isRequired: true,
+                      textInputType: TextInputType.visiblePassword,
+                      prefixIcon: const Icon(Icons.password),
+                      suffixIcon: const Icon(Icons.remove_red_eye),
+                      name: "Password",
+                      hint: "*******************",
+                    ),
+                    const SizedBox(height: 10),
+                    AppInput(
+                      controller: controller.registerconfirmpassword,
+                      isPassword: true,
+                      isRequired: true,
+                      textInputType: TextInputType.visiblePassword,
+                      prefixIcon: const Icon(Icons.password),
+                      suffixIcon: const Icon(Icons.remove_red_eye),
+                      name: "Confirm password",
+                      hint: "*******************",
+                    ),
+                    const SizedBox(height: 30),
+                    ElevatedButton(
+                        onPressed: controller.onSignIn,
+                        child: const Text("Register")),
+                  ],
+                ))));
   }
 }

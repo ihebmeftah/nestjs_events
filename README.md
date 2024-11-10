@@ -13,7 +13,7 @@ This is a backend service for managing events built with [NestJS](https://nestjs
 - **Event Registration**: Users can register for events.
 - **Search and Filtering**: Search events by title, date, and other filters.
 - **Notifications**: Notify users about upcoming events.
-  
+
 ## Tech Stack
 
 - **NestJS**: Backend framework.
@@ -22,7 +22,7 @@ This is a backend service for managing events built with [NestJS](https://nestjs
 - **Passport**: For authentication and JWT token management.
 - **Swagger**: API documentation.
 - **Docker**: Containerization for development and deployment.
-  
+
 ## Getting Started
 
 ### Prerequisites
@@ -42,4 +42,19 @@ Make sure you have the following installed on your local development machine:
    git clone https://github.com/your-username/events-management-api.git
    cd events-management-api
 
+   ```
+
 2. Run docker compose:
+
+```bash
+  docker compose up --build --detach
+
+```
+
+3. Run migration:
+
+```bash
+  npm run migration:generate -- db/migrations/init
+  npm run migration:run
+
+```

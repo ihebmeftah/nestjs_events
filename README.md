@@ -41,3 +41,5 @@ Make sure you have the following installed on your local development machine:
    ```bash
    git clone https://github.com/your-username/events-management-api.git
    cd events-management-api
+
+2. Run docker compose:

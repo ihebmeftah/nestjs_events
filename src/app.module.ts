@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from 'db/data-source';
 import { AuthModule } from './auth/auth.module';
 import { EventeModule } from './evente/evente.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { EventeModule } from './evente/evente.module';
     TypeOrmModule.forRoot(dataSourceOptions),
     AuthModule,
     EventeModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

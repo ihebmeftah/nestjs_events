@@ -1,4 +1,5 @@
 import { UUID } from 'crypto';
+import { Category } from 'src/categories/entities/category.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -27,4 +28,7 @@ export class Evente {
 
     @ManyToOne(() => User, (user) => user.eventes)
     createdBy: User;
+
+    @ManyToOne(() => Category, (cat) => cat.eventes, { onDelete: 'CASCADE', })
+    category: Category;
 }

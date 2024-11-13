@@ -28,4 +28,7 @@ export class CreateEventeDto {
 
     @IsUUID()
     userId: UUID;
+
+    @IsUUID()
+    categoryId: UUID;
 }

@@ -5,23 +5,32 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersService } from 'src/users/users.service';
 import { UUID } from 'crypto';
+import { CategoriesService } from 'src/categories/categories.service';
 
 @Injectable()
 export class EventeService {
   constructor(
     @InjectRepository(Evente) private readonly eventeRepository: Repository<Evente>,
-    @Inject(forwardRef(() => UsersService)) private readonly userService: UsersService
+    @Inject(forwardRef(() => UsersService)) private readonly userService: UsersService,
+    private readonly categoryServices: CategoriesService
   ) { }
   async create(createEventeDto: CreateEventeDto): Promise<Evente> {
+    const category = await this.categoryServices.findOne(createEventeDto.categoryId);
     const user = await this.userService.findOneById(createEventeDto.userId);
     const event = await this.eventeRepository.create(createEventeDto)
     event.createdBy = user;
+    event.category = category;
     return await this.eventeRepository.save(event);
   }
 
   async findAll(): Promise<Evente[]> {
-    return await this.eventeRepository.find();
+    return await this.eventeRepository.find({
+      relations: {
+        category: true
+      }
+    });
   }
+
 
   async findAllbyUser(id: UUID): Promise<Evente[]> {
     return await this.eventeRepository.find({
@@ -29,7 +38,7 @@ export class EventeService {
         createdBy: {
           id: id
         }
-      }
+      },
     });
   }
 

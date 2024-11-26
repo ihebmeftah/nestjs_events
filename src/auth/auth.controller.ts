@@ -18,6 +18,12 @@ export class AuthController {
         return this.authService.register(registerUser);
     }
 
+    @Get("verify")
+    verify(@Request() req) {
+        const token = req.headers['authorization'];
+        return this.authService.verify(token);
+    }
+
     @Get('/me')
     @UseGuards(JwtAuthGuard)
     getProfile(

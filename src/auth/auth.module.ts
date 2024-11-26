@@ -12,7 +12,7 @@ import { UsersModule } from 'src/users/users.module';
     JwtModule.register({
       secret: 'HAD_12X#@',
       signOptions: {
-        expiresIn: '30m',
+        expiresIn: '1h',
       },
     }),
     PassportModule,

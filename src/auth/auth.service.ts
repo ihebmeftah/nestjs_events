@@ -28,4 +28,20 @@ export class AuthService {
             createdUser
         };
     }
+    async verify(bearertoken: string) {
+        try {
+            const token = bearertoken.split(' ')[1];
+            if (!token) {
+                throw new HttpException('Token is missing', HttpStatus.UNAUTHORIZED);
+            }
+            const decoded = this.jwtService.verify(token);
+            const newToken = this.jwtService.sign(
+                { email: decoded.email, sub: decoded.sub },
+                { expiresIn: '1h' }
+            );
+            return { accessToken: newToken };
+        } catch (error) {
+            throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+        }
+    }
 }

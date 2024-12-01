@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+import '../../../routes/app_pages.dart';
 
 class RegisterController extends GetxController {
   final registerFormkey = GlobalKey<FormState>();
@@ -11,6 +12,8 @@ class RegisterController extends GetxController {
   final registerconfirmpassword = TextEditingController();
 
   void onSignIn() {
-    if (registerFormkey.currentState!.validate()) {}
+    if (registerFormkey.currentState!.validate()) {
+      Get.offAllNamed(Routes.HOME);
+    }
   }
 }

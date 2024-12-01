@@ -20,7 +20,21 @@ class App extends StatelessWidget {
       initialRoute: Routes.LOGIN,
       getPages: AppPages.routes,
       theme: ThemeData(
-          appBarTheme: const AppBarTheme(surfaceTintColor: Colors.white),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            selectedItemColor: Colors.pink,
+            unselectedItemColor: Colors.grey.shade500,
+          ),
+          drawerTheme: const DrawerThemeData(),
+          appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 22,
+            ),
+            centerTitle: false,
+            foregroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.white),
+            backgroundColor: Colors.pink,
+          ),
           textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
             foregroundColor: Colors.pink,

@@ -12,7 +12,7 @@ class RegisterView extends GetView<RegisterController> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           foregroundColor: Colors.black,
           iconTheme: const IconThemeData(color: Colors.black),
           titleTextStyle: const TextStyle(color: Colors.black, fontSize: 22),

@@ -13,7 +13,7 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
         body: Padding(
           padding: const EdgeInsets.all(25.0),

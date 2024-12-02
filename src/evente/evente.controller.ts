@@ -4,7 +4,7 @@ import { CreateEventeDto } from './dto/create-evente.dto';
 import { JwtAuthGuard } from 'src/auth/gurads/auth.guards';
 import { UUID } from 'crypto';
 
-@Controller('evente')
+@Controller('events')
 @UseGuards(JwtAuthGuard)
 export class EventeController {
   constructor(private readonly eventeService: EventeService) { }

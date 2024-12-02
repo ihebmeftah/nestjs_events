@@ -39,7 +39,7 @@ export class AuthService {
                 { email: decoded.email, sub: decoded.sub },
                 { expiresIn: '1h' }
             );
-            return { accessToken: newToken };
+            return newToken;
         } catch (error) {
             throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
         }

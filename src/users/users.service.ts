@@ -30,7 +30,6 @@ export class UsersService {
     return await this.userRepository.save(createUserDto);
   }
   async update(id: UUID, updateUserDto: UpdateUserDto) {
-    console.log(updateUserDto);
     const oldUser = await this.findOneById(id);
 
     if (updateUserDto.phone) {

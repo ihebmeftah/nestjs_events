@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { UUID } from 'crypto';
 import { hash } from 'bcrypt';
 import { EventeService } from 'src/evente/evente.service';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -27,6 +28,34 @@ export class UsersService {
         HttpStatus.CONFLICT);
     createUserDto.password = await hash(createUserDto.password, 10);
     return await this.userRepository.save(createUserDto);
+  }
+  async update(id: UUID, updateUserDto: UpdateUserDto) {
+    console.log(updateUserDto);
+    const oldUser = await this.findOneById(id);
+
+    if (updateUserDto.phone) {
+      const existphone = await this.userRepository.existsBy({
+        phone: updateUserDto.phone,
+      })
+      if (existphone) {
+        throw new HttpException('The phone number already exist', HttpStatus.CONFLICT);
+      }
+    }
+
+    if (updateUserDto.email) {
+      const existemail = await this.userRepository.existsBy({
+        email: updateUserDto.email,
+      })
+      if (existemail) {
+        throw new HttpException('The email already exist', HttpStatus.CONFLICT);
+      }
+    }
+
+    const newUser = await this.userRepository.update(id, updateUserDto);
+    if (!newUser || newUser.affected < 0) {
+      throw new HttpException(`Somthing wrong`, HttpStatus.FORBIDDEN);
+    }
+    return { msg: "Update done succeffuly" };
   }
 
   async findAll(): Promise<User[]> {

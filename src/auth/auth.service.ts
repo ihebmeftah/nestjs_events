@@ -14,7 +14,7 @@ export class AuthService {
     async login(loginUser: LoginUserDto) {
         const user = await this.userService.findOneByEmail(loginUser.email);
         const isMatch = await compare(loginUser.password, user.password);
-        if (!isMatch) throw new HttpException('Password incorrect', HttpStatus.UNAUTHORIZED);
+        if (!isMatch) throw new HttpException('Password incorrect', HttpStatus.BAD_REQUEST);
         return {
             accessToken: this.jwtService.sign({ email: user.email, sub: user.id },),
             user

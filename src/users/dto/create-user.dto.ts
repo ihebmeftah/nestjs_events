@@ -7,7 +7,8 @@ export class CreateUserDto {
     @ApiProperty({
         type: String,
         description: 'Write your first name',
-        example: 'John'
+        example: 'John',
+        required: true
     })
     firstName: string;
 
@@ -16,7 +17,9 @@ export class CreateUserDto {
     @ApiProperty({
         type: String,
         description: 'Write your last name',
-        example: 'doe'
+        example: 'doe',
+        required: true
+
     })
     lastName: string;
 
@@ -25,7 +28,9 @@ export class CreateUserDto {
     @ApiProperty({
         type: String,
         description: 'Write your email',
-        example: 'DhH0O@example.com'
+        example: 'DhH0O@example.com',
+        required: true
+
     })
     email: string;
 
@@ -34,7 +39,8 @@ export class CreateUserDto {
         type: String,
         description: 'it is token from FCM',
         example: 'fcmToken',
-        nullable: true
+        nullable: true,
+        required: false
     })
     deviceToken: string;
 
@@ -44,6 +50,7 @@ export class CreateUserDto {
         type: String,
         description: 'WRite your password',
         example: 'password',
+        required: true
     })
     password: string;
 
@@ -52,6 +59,7 @@ export class CreateUserDto {
         type: String,
         description: 'Write your phone',
         example: '+216 20 000 000',
+        required: true
     })
     phone: string;
 

@@ -33,6 +33,7 @@ export class EventeService {
 
 
   async findAllbyUser(id: UUID): Promise<Evente[]> {
+    await this.userService.findOneById(id);
     return await this.eventeRepository.find({
       where: {
         createdBy: {

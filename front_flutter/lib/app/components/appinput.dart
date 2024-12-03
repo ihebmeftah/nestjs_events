@@ -18,6 +18,7 @@ class AppInput extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? textInputType;
   final bool isRequired, isPassword;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,11 +42,7 @@ class AppInput extends StatelessWidget {
                 return "Please enter a valid email";
               }
             }
-            if (textInputType == TextInputType.phone) {
-              if (!GetUtils.isPhoneNumber(value!)) {
-                return "Please enter a valid phone number";
-              }
-            }
+
             if (isRequired) {
               if (value!.isEmpty) {
                 return "This field is required";

@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Request, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Request, Post, UseGuards, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login_user.dto';
 import { JwtAuthGuard } from './gurads/auth.guards';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { ApiBadRequestResponse, ApiConflictResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { UsersService } from 'src/users/users.service';
+import { Response } from 'express';
 
 @Controller('auth')
 @ApiTags("auth")
@@ -18,8 +19,8 @@ export class AuthController {
     @ApiOkResponse({ description: 'It will return the user in the response with access token' })
     @ApiBadRequestResponse({ description: 'Password incorrect' })
     @ApiNotFoundResponse({ description: 'Email not found' })
-    login(@Body() loginUser: LoginUserDto) {
-        return this.authService.login(loginUser);
+    async login(@Body() loginUser: LoginUserDto, @Res() res: Response) {
+        return res.status(200).json(await this.authService.login(loginUser));
     }
 
     @Post("register")

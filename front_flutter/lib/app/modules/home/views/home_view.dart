@@ -43,13 +43,14 @@ class HomeView extends GetView<HomeController> {
               title: Text("My profile"),
             ),
             const Spacer(),
-            const SafeArea(
+            SafeArea(
               child: ListTile(
-                titleTextStyle: TextStyle(fontWeight: FontWeight.bold),
+                onTap: controller.logout,
+                titleTextStyle: const TextStyle(fontWeight: FontWeight.bold),
                 iconColor: Colors.red,
                 textColor: Colors.red,
-                leading: Icon(Icons.logout),
-                title: Text("Logout"),
+                leading: const Icon(Icons.logout),
+                title: const Text("Logout"),
               ),
             )
           ],
@@ -102,7 +103,7 @@ class HomeView extends GetView<HomeController> {
                 index: controller.indexbtnav,
                 children: const [
                   Home(),
-                  Text("my events"),
+                  Text("my"),
                   Text("notifications"),
                 ],
               );

@@ -1,4 +1,7 @@
+import 'package:events/app/data/local/sharedpref.dart';
 import 'package:get/get.dart';
+
+import '../../../routes/app_pages.dart';
 
 class HomeController extends GetxController {
   int indexbtnav = 0;
@@ -8,5 +11,10 @@ class HomeController extends GetxController {
       indexbtnav = index;
       update(["indexbtnav"]);
     }
+  }
+
+  void logout() async {
+    await Sharedpref().clearStorage();
+    Get.offAllNamed(Routes.LOGIN);
   }
 }

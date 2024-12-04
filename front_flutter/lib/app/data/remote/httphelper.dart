@@ -14,8 +14,7 @@ class Httphelper {
       : 'http://10.0.2.2:3000/api/v1';
   static Map<String, String> get _header => {
         if (Sharedpref().getToken != null)
-          'Authorization': Sharedpref().getToken!,
-        'Content-Type': 'application/json'
+          'Authorization': Sharedpref().getToken!
       };
 
   static Future<Map<String, dynamic>> get({
@@ -34,7 +33,11 @@ class Httphelper {
       Object? body}) async {
     final response = await http.post(
       Uri.parse('$_baseUrl$path'),
-      headers: {..._header, if (header != null) ...header},
+      headers: {
+        ..._header,
+        if (header != null) ...header,
+        'Content-Type': 'application/json'
+      },
       body: body == null ? null : json.encode(body),
     );
     return _processResponse(response);

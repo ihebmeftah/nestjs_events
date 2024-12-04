@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { EventeModule } from './evente/evente.module';
 import { CategoriesModule } from './categories/categories.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
+import { ParticipationModule } from './participation/participation.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { FileUploadModule } from './file-upload/file-upload.module';
     EventeModule,
     CategoriesModule,
     FileUploadModule,
+    ParticipationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

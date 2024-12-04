@@ -1,7 +1,8 @@
 import { UUID } from 'crypto';
 import { Category } from 'src/categories/entities/category.entity';
+import { Participation } from 'src/participation/entities/participation.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Evente {
@@ -34,4 +35,7 @@ export class Evente {
 
     @ManyToOne(() => Category, (cat) => cat.eventes, { onDelete: 'CASCADE', })
     category: Category;
+    
+    @OneToMany(() => Participation, (participation) => participation.event)
+    participations: Participation[];
 }

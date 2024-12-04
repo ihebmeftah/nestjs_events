@@ -7,10 +7,10 @@ part 'login.g.dart';
 class Login {
   @JsonKey()
   String accessToken;
-  @JsonKey(name: "createdUser")
-  User createdUser;
+  @JsonKey(name: 'user')
+  User user;
 
-  Login({required this.accessToken, required this.createdUser});
+  Login({required this.accessToken, required this.user});
 
   factory Login.fromJson(Map<String, dynamic> json) => _$LoginFromJson(json);
 }

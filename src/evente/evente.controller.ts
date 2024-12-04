@@ -1,20 +1,33 @@
-import { Controller, Get, Post, Body, Param, UseGuards, ParseUUIDPipe, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, ParseUUIDPipe, HttpStatus, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { EventeService } from './evente.service';
 import { CreateEventeDto } from './dto/create-evente.dto';
 import { JwtAuthGuard } from 'src/auth/gurads/auth.guards';
 import { UUID } from 'crypto';
 import { ApiConflictResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { FileUploadService } from 'src/file-upload/file-upload.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { getModuleSpecificMulterOptions, multerOptions } from 'src/file-upload/ file-upload.config';
 
 @Controller('events')
 @UseGuards(JwtAuthGuard)
 export class EventeController {
-  constructor(private readonly eventeService: EventeService) { }
+  constructor(private readonly eventeService: EventeService,
+    private readonly fileUploadService: FileUploadService
+
+  ) { }
 
   @Post()
+  @UseInterceptors(FileInterceptor('file', getModuleSpecificMulterOptions('events')))
   @ApiOperation({ summary: 'This endpoint update a user info ' })
   @ApiNotFoundResponse({ description: 'User or Category not found' })
   @ApiOkResponse({ description: 'It will return a object created of evenet', })
-  create(@Body() createEventeDto: CreateEventeDto) {
+  create(
+    @Body() createEventeDto: CreateEventeDto,
+    @UploadedFile() file: Express.Multer.File
+  ) {
+    if (file) {
+      createEventeDto.file = file.path;
+    }
     return this.eventeService.create(createEventeDto);
   }
 

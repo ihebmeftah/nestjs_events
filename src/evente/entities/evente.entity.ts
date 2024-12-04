@@ -12,6 +12,9 @@ export class Evente {
     title: string;
 
     @Column({ nullable: true })
+    file: string;
+
+    @Column({ nullable: true })
     subtitle: string;
 
     @Column()

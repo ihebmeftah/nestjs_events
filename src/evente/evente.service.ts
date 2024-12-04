@@ -17,6 +17,7 @@ export class EventeService {
   async create(createEventeDto: CreateEventeDto): Promise<Evente> {
     const category = await this.categoryServices.findOne(createEventeDto.categoryId);
     const user = await this.userService.findOneById(createEventeDto.userId);
+    createEventeDto.capacity = Number(createEventeDto.capacity);
     const event = await this.eventeRepository.create(createEventeDto)
     event.createdBy = user;
     event.category = category;

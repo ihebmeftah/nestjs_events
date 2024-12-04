@@ -57,9 +57,4 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 #Migrations
 db/migrations/
-uploads/0da9bb8e-243d-4fe7-82b0-b2a33ae60125.png
-uploads/3b4dd306-913f-4b58-8945-d5806be202cf.png
-uploads/8a81665b-9f70-4445-b127-d726acf59572.png
-uploads/608df4c1-5a7d-4298-8b51-e0499567e24b.png
-uploads/8348c836-ed1c-4ba3-91d2-582240b89b50.png
-uploads/fe8996ab-1267-44e7-9f81-8a18e713c00b.png
+uploads/

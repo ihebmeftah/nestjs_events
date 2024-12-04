@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsDate, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID } from "class-validator";
+import { IsArray, IsDate, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString, IsUUID } from "class-validator";
 import { UUID } from "crypto";
 
 export class CreateEventeDto {
@@ -41,7 +41,7 @@ export class CreateEventeDto {
     )
     desc: string;
 
-    @IsNumber()
+    @IsNumberString()
     @ApiProperty(
         {
             type: String,
@@ -78,9 +78,13 @@ export class CreateEventeDto {
     )
     tags: string[]
 
-    @IsUUID()
-    @IsArray()
+    @IsString()
     @IsOptional()
+    @ApiProperty()
+    file: string
+
+    @IsUUID()
+    @IsNotEmpty()
     @ApiProperty(
         {
             type: String,
@@ -92,8 +96,7 @@ export class CreateEventeDto {
     userId: UUID;
 
     @IsUUID()
-    @IsArray()
-    @IsOptional()
+    @IsNotEmpty()
     @ApiProperty(
         {
             type: String,

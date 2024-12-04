@@ -5,12 +5,15 @@ import { UsersModule } from 'src/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Evente } from './entities/evente.entity';
 import { CategoriesModule } from 'src/categories/categories.module';
+import { FileUploadModule } from 'src/file-upload/file-upload.module';
 
 @Module({
   imports: [
     forwardRef(() => UsersModule),
     TypeOrmModule.forFeature([Evente]),
-    CategoriesModule
+    CategoriesModule,
+
+    FileUploadModule
   ],
   controllers: [EventeController],
   providers: [EventeService],

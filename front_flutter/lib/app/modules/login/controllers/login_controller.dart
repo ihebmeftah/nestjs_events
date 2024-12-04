@@ -30,6 +30,7 @@ class LoginController extends GetxController with StateMixin {
         );
         final Login loggedUser = await AuthServices.login(loginDto);
         Sharedpref().saveToken(loggedUser.accessToken);
+        Sharedpref().saveUserId(loggedUser.user.id!);
         Get.offAllNamed(Routes.HOME);
       }
     } on NotFoundExcpetion {

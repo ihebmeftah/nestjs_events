@@ -25,7 +25,7 @@ export class AuthService {
         const createdUser = await this.userService.create(registerDto);
         return {
             accessToken: this.jwtService.sign({ email: createdUser.email, sub: createdUser.id },),
-            createdUser
+            user: createdUser
         };
     }
     async verify(bearertoken: string) {

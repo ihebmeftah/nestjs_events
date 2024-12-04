@@ -37,6 +37,7 @@ class RegisterController extends GetxController with StateMixin {
         );
         final Login loggedUser = await AuthServices.register(userCreated);
         Sharedpref().saveToken(loggedUser.accessToken);
+        Sharedpref().saveUserId(loggedUser.user.id!);
         Get.offAllNamed(Routes.HOME);
       }
     } on ConflictExcpetion {

@@ -12,7 +12,6 @@ import { FileUploadModule } from 'src/file-upload/file-upload.module';
     forwardRef(() => UsersModule),
     TypeOrmModule.forFeature([Evente]),
     CategoriesModule,
-
     FileUploadModule
   ],
   controllers: [EventeController],

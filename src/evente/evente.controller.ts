@@ -21,12 +21,12 @@ export class EventeController {
   @ApiOperation({ summary: 'This endpoint update a user info ' })
   @ApiNotFoundResponse({ description: 'User or Category not found' })
   @ApiOkResponse({ description: 'It will return a object created of evenet', })
-  create(
+  async create(
     @Body() createEventeDto: CreateEventeDto,
     @UploadedFile() file: Express.Multer.File
   ) {
     if (file) {
-      createEventeDto.file = file.path;
+      createEventeDto.file = await this.fileUploadService.uploadFile(file);
     }
     return this.eventeService.create(createEventeDto);
   }

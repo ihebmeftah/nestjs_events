@@ -77,5 +77,10 @@ export class UsersService {
     const user = await this.findOneById(id);
     return await this.eventeService.findAllbyUser(id);
   }
-
+  async changeProfilePic(id: UUID, file: string) {
+    const user = await this.findOneById(id);
+    user.photo = file;
+    await this.userRepository.update(id, user);
+    return await this.findOneById(id);
+  }
 }

@@ -15,8 +15,10 @@ export class User extends TimeStampBase {
     lastName: string;
     @Column({ unique: true })
     email: string;
-    @Column({ unique: true })
+    @Column({ nullable: true })
     phone: string;
+    @Column({ nullable: true })
+    photo: string;
     @Column({ nullable: true })
     deviceToken: string;
     @Column()

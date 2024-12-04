@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with StateMixin {
   int indexbtnav = 0;
 
   void changeBtnnav(index) {
@@ -12,6 +12,8 @@ class HomeController extends GetxController {
       update(["indexbtnav"]);
     }
   }
+
+
 
   void logout() async {
     await Sharedpref().clearStorage();

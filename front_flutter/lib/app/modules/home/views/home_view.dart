@@ -1,7 +1,11 @@
+import 'package:events/app/modules/events/views/events_view.dart';
+import 'package:events/app/modules/notifications/views/notifications_view.dart';
+import 'package:events/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -27,20 +31,26 @@ class HomeView extends GetView<HomeController> {
       drawer: Drawer(
         child: Column(
           children: [
-            UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.pink,
-              ),
-              accountName: const Text("Iheb meftah"),
-              accountEmail: const Text("c6gqU@example.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.grey.shade200,
-                child: const Text("I"),
-              ),
-            ),
-            const ListTile(
-              leading: Icon(Icons.person),
-              title: Text("My profile"),
+            GetX<ProfileController>(
+                init: ProfileController(),
+                builder: (c) {
+                  return UserAccountsDrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: Colors.pink,
+                    ),
+                    accountName: Text(
+                        "${c.user.value.firstName ?? "--"} ${c.user.value.lastName ?? "--"}"),
+                    accountEmail: Text(c.user.value.email ?? "--"),
+                    currentAccountPicture: CircleAvatar(
+                      backgroundColor: Colors.grey.shade200,
+                      child: Text(c.user.value.firstName?[0] ?? "--"),
+                    ),
+                  );
+                }),
+            ListTile(
+              onTap: () => Get.toNamed(Routes.PROFILE),
+              leading: const Icon(Icons.person),
+              title: const Text("My profile"),
             ),
             const Spacer(),
             SafeArea(
@@ -99,14 +109,11 @@ class HomeView extends GetView<HomeController> {
         child: GetBuilder<HomeController>(
             id: "indexbtnav",
             builder: (_) {
-              return IndexedStack(
-                index: controller.indexbtnav,
-                children: const [
-                  Home(),
-                  Text("my"),
-                  Text("notifications"),
-                ],
-              );
+              return [
+                const Home(),
+                const EventsView(),
+                const NotificationsView(),
+              ][controller.indexbtnav];
             }),
       ),
     );
